@@ -12,7 +12,16 @@ class GetPrograms
     response.body
   end
 
+  def program_school
+    # we use the json library to parse the api response into nicely formatted json
+    programs = JSON.parse(self.get_programs)
+    programs.map {|program| program['agency'] }
+  end
+
 end
 
-programs = GetPrograms.new.get_programs
-puts programs
+# programs = GetPrograms.new.get_programs
+# puts programs
+
+programs = GetPrograms.new
+puts programs.program_school.uniq
